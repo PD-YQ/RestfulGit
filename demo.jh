@@ -1,0 +1,48 @@
+
+enum BranchStatus {
+    ACTIVE, INACTIVE
+}
+
+entity Tag{
+	id String
+}
+
+entity Commit{
+	id String
+}
+
+
+entity Branch{
+	name String,
+    status BranchStatus
+}
+
+entity Repo{
+	workBranch Branch,
+    url String,
+    username String,
+    password String
+}
+
+relationship OneToOne {
+	Commit{tag} to Tag
+}
+
+relationship OneToMany {
+	Branch{commit} to Commit
+}
+
+relationship OneToMany {
+	Repo{branch} to Branch
+}
+
+
+// Set pagination options
+paginate Tag, Commit, Branch with infinite-scroll
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl except Repo
+// Set an angular suffix
+angularSuffix * with mySuffix
