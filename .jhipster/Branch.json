@@ -1,0 +1,41 @@
+{
+  "name": "Branch",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "BranchStatus",
+      "fieldValues": "ACTIVE,INACTIVE"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "commit",
+      "otherEntityRelationshipName": "branch",
+      "relationshipName": "commit"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "repo",
+      "otherEntityRelationshipName": "branch",
+      "relationshipName": "repo",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200925015632",
+  "entityTableName": "branch",
+  "dto": "mapstruct",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "angularJSSuffix": "mySuffix"
+}

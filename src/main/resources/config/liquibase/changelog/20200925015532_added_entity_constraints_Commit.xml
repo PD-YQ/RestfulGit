@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity Commit.
+    -->
+    <changeSet id="20200925015532-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="tag_id"
+                                 baseTableName="commit"
+                                 constraintName="fk_commit_tag_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tag"/>
+
+        <addForeignKeyConstraint baseColumnNames="branch_id"
+                                 baseTableName="commit"
+                                 constraintName="fk_commit_branch_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="branch"/>
+
+    </changeSet>
+</databaseChangeLog>

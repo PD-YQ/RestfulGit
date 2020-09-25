@@ -1,0 +1,71 @@
+<div>
+    <h2 id="page-heading">
+        <span>Commits</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-commit-my-suffix" [routerLink]="['/commit-my-suffix/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Commit
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="commits?.length === 0">
+        <span>No commits found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="commits && commits.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="tagId"><span>Tag</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="branchId"><span>Branch</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let commit of commits ;trackBy: trackId">
+                    <td><a [routerLink]="['/commit-my-suffix', commit.id, 'view']">{{ commit.id }}</a></td>
+                    <td>
+                        <div *ngIf="commit.tagId">
+                            <a [routerLink]="['/tag-my-suffix', commit.tagId , 'view']" >{{ commit.tagId }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="commit.branchId">
+                            <a [routerLink]="['/branch-my-suffix', commit.branchId , 'view']" >{{ commit.branchId }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/commit-my-suffix', commit.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/commit-my-suffix', commit.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(commit)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

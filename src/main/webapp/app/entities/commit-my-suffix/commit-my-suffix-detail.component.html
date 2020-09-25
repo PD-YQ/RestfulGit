@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="commit">
+            <h2><span>Commit</span> {{ commit.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Tag</span></dt>
+                <dd>
+                    <div *ngIf="commit.tagId">
+                        <a [routerLink]="['/tag-my-suffix', commit.tagId, 'view']">{{ commit.tagId }}</a>
+                    </div>
+                </dd>
+                <dt><span>Branch</span></dt>
+                <dd>
+                    <div *ngIf="commit.branchId">
+                        <a [routerLink]="['/branch-my-suffix', commit.branchId, 'view']">{{ commit.branchId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/commit-my-suffix', commit.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

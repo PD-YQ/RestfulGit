@@ -1,0 +1,33 @@
+{
+  "name": "Commit",
+  "fields": [],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "tag",
+      "otherEntityRelationshipName": "commit",
+      "relationshipName": "tag",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "branch",
+      "otherEntityRelationshipName": "commit",
+      "relationshipName": "branch",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200925015532",
+  "entityTableName": "commit",
+  "dto": "mapstruct",
+  "pagination": "infinite-scroll",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*",
+  "angularJSSuffix": "mySuffix"
+}
